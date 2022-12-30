@@ -19,7 +19,7 @@ function VENDOR_CLASS:GetName()
 end
 
 function VENDOR_CLASS:GetID()
-    return self.name
+    return self.id
 end
 
 function VENDOR_CLASS:GetItems()
