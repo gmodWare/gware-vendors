@@ -31,6 +31,7 @@ end
     - name: string
     - description: string
     - price: int
+    - color: Color
     - model: string
     - class: string
 */
