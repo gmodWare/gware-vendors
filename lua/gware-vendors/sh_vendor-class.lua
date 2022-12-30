@@ -9,6 +9,10 @@ function VENDOR_CLASS:Create(name)
     return newObject
 end
 
+function VENDOR_CLASS:GetName()
+    return self.name
+end
+
 function VENDOR_CLASS:GetItems()
     return self.items
 end
@@ -28,4 +32,3 @@ end
 function gWare.Vendors.CreateVendor(name)
     return VENDOR_CLASS:Create(name)
 end
-
