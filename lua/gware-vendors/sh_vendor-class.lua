@@ -19,13 +19,14 @@ end
 
 /* 
     dataTbl:
-    - item_name: string
-    - item_price: int
-    - item_model: string
-    - item_class: string
+    - name: string
+    - description: string
+    - price: int
+    - model: string
+    - class: string
 */
 function VENDOR_CLASS:AddItem(dataTbl)
-    table.Add(dataTbl, self.items)
+    table.insert(self.items, dataTbl)
 end
 
 // public constructor
