@@ -4,6 +4,8 @@ gWare.Vendors = gWare.Vendors or {}
 include("gware-vendors/sh_vendor-class.lua")
 
 if SERVER then
+    util.AddNetworkString("gWare.Vendors.BuyItem")
+
     include("gware-vendors/sv_vendors.lua")
 
     AddCSLuaFile("gware-vendors/sh_vendor-class.lua")
