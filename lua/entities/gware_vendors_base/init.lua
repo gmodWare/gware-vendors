@@ -35,7 +35,7 @@ function ENT:Use(ply, activator)
     if not IsFirstTimePredicted() then return end
 
     if self:GetVendorID() <= 0 then
-        VoidLib.Notify(ply, "gWare Vendor", "Du hast diesen Händler noch nicht initialisiert! /setvendor <vendor name>", VoidUI.Colors.Red, 5)
+        VoidLib.Notify(ply, "gWare Vendor", "Du hast diesen gWare Vendor noch nicht initialisiert! /setvendor <vendor name>", VoidUI.Colors.Red, 5)
         return
     end
 

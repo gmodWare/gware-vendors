@@ -86,7 +86,7 @@ function PANEL:ItemDetail(item, itemIndex)
 
     self.buyButton.DoClick = function()
         if not canAfford then
-            VoidLib.Notify("Händler", "Du hast nicht genug Geld um diesen Gegenstand zu kaufen!", VoidUI.Colors.Red, 5)
+            VoidLib.Notify("gWare Vendor", "Du hast nicht genug Geld um diesen Gegenstand zu kaufen!", VoidUI.Colors.Red, 5)
             return
         end
 
@@ -98,10 +98,3 @@ function PANEL:ItemDetail(item, itemIndex)
 end
 
 vgui.Register("gWare.Vendor", PANEL, "VoidUI.Frame")
-
-concommand.Add("gv", function()
-    local frame = vgui.Create("gWare.Vendor")
-    frame:SetVendor(GWARE_VENDORS[1])
-    frame:GetItems()
-    frame:ItemDetail()
-end)

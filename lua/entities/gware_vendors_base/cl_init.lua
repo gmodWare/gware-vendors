@@ -12,7 +12,7 @@ function ENT:Draw()
     local mins, maxs = self:WorldSpaceAABB()
     local height = maxs.z - mins.z
 
-    local offset = Vector( 0, 0, height + 15)
+    local offset = Vector( 0, 0, height + 10)
     local ang = LocalPlayer():EyeAngles()
     local pos = self:GetPos() + offset + ang:Up()
 

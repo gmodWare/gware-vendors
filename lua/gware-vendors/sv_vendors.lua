@@ -7,14 +7,14 @@ net.Receive("gWare.Vendors.BuyItem", function(len, ply)
     if not item then return end
 
     if not ply:canAfford(item.price) then
-        VoidLib.Notify(ply, "Händler", "Du hast nicht genug Geld um diesen Gegenstand zu kaufen!", VoidUI.Colors.Red, 5)
+        VoidLib.Notify(ply, "gWare Vendor", "Du hast nicht genug Geld um diesen Gegenstand zu kaufen!", VoidUI.Colors.Red, 5)
         return
     end
 
     ply:addMoney(-item.price)
     ply:Give(item.class)
 
-    VoidLib.Notify(ply, "Händler", "Du hast erfolgreich " .. item.name .. " gekauft!", VoidUI.Colors.Green, 5)
+    VoidLib.Notify(ply, "gWare Vendor", "Du hast erfolgreich " .. item.name .. " gekauft!", VoidUI.Colors.Green, 5)
 end)
 
 hook.Add("PlayerSay", "gWare.Vendors.InitVendor", function(ply, text)
@@ -61,6 +61,8 @@ hook.Add("PlayerSay", "gWare.Vendors.InitVendor", function(ply, text)
         })
 
         file.Write("vendors.json", util.TableToJSON(data, true))
+
+        VoidLib.Notify(ply, "gWare Vendor", "Du hast erfolgreich den Vendor initialisiert!", VoidUI.Colors.Green, 5)
     end
 
     if removeVendor then
@@ -87,5 +89,7 @@ hook.Add("InitPostEntity", "gWare.Vendors.Init", function()
         ent:SetAngles(Angle(vendor.angles))
         ent:SetVendorID(vendor.id)
         ent:Spawn()
+
+        ent:SetModel(GWARE_VENDORS[vendor.id]:GetModel())
     end
 end)

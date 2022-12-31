@@ -6,9 +6,9 @@ VENDOR_CLASS.__index = VENDOR_CLASS
 function VENDOR_CLASS:Create(name, model)
     local newObject = setmetatable({}, VENDOR_CLASS)
     newObject.name = name
-    newObject.items = {}
     newObject.id = #GWARE_VENDORS + 1
     newObject.model = model
+    newObject.items = {}
 
     table.insert(GWARE_VENDORS, newObject)
 
@@ -21,6 +21,10 @@ end
 
 function VENDOR_CLASS:GetID()
     return self.id
+end
+
+function VENDOR_CLASS:GetModel()
+    return self.model
 end
 
 function VENDOR_CLASS:GetItems()
@@ -41,8 +45,8 @@ function VENDOR_CLASS:AddItem(dataTbl)
 end
 
 // public constructor
-function gWare.Vendors.CreateVendor(name)
-    return VENDOR_CLASS:Create(name)
+function gWare.Vendors.CreateVendor(name, model)
+    return VENDOR_CLASS:Create(name, model)
 end
 
 function gWare.Vendors.GetVendor(str)
