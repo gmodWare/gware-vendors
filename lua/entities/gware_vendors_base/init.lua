@@ -46,22 +46,3 @@ function ENT:Use(ply, activator)
 
     timer.Simple(0.1, function() cd = false end)
 end
-
-function ENT:OnRemove()
-    local json = file.Read("vendors.json", "DATA")
-
-    if not json then return end
-
-    local vendorTbl = util.JSONToTable(json)
-    for index, vendorData in ipairs(vendorTbl[game.GetMap()]) do
-        local posRoundJson = Vector(math.Round(vendorData.pos.x), math.Round(vendorData.pos.y), math.Round(vendorData.pos.z))
-        local posRoundSelf = Vector(math.Round(self:GetPos().x), math.Round(self:GetPos().y), math.Round(self:GetPos().z))
-
-        if posRoundJson != posRoundSelf then continue end
-
-        table.remove(vendorTbl[game.GetMap()], index)
-        break
-    end
-
-    file.Write("vendors.json", util.TableToJSON(vendorTbl, true))
-end

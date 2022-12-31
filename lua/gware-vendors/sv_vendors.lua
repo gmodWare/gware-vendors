@@ -75,6 +75,23 @@ hook.Add("PlayerSay", "gWare.Vendors.InitVendor", function(ply, text)
             return
         end
 
+        local json = file.Read("vendors.json", "DATA")
+
+        if not json then return end
+
+        local vendorTbl = util.JSONToTable(json)
+        for index, vendorData in ipairs(vendorTbl[game.GetMap()]) do
+            local posRoundJson = Vector(math.Round(vendorData.pos.x), math.Round(vendorData.pos.y), math.Round(vendorData.pos.z))
+            local posRoundSelf = Vector(math.Round(ent:GetPos().x), math.Round(ent:GetPos().y), math.Round(ent:GetPos().z))
+
+            if posRoundJson != posRoundSelf then continue end
+
+            table.remove(vendorTbl[game.GetMap()], index)
+            break
+        end
+
+        file.Write("vendors.json", util.TableToJSON(vendorTbl, true))
+
         ent:Remove()
     end
 end)
