@@ -5,8 +5,6 @@ include("shared.lua")
 
 util.AddNetworkString("gWare.Vendor.SendVendor")
 
-print(KXX.ItemShop.EntityModel)
-
 function ENT:Initialize()
     local model = "models/humans/group01/male_02.mdl"
 
@@ -64,8 +62,6 @@ function ENT:OnRemove()
         table.remove(vendorTbl[game.GetMap()], index)
         break
     end
-
-    //PrintTable(vendorTbl)
 
     file.Write("vendors.json", util.TableToJSON(vendorTbl, true))
 end

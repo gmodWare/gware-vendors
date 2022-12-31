@@ -22,6 +22,8 @@ hook.Add("PlayerSay", "gWare.Vendors.InitVendor", function(ply, text)
     local removeVendor = text:StartWith("/removevendor" or "!removevendor")
 
     if setVendor then
+        if not ply:IsSuperAdmin() then return end // TODO : add cami support
+
         local spacePos = text:find(" ")
 
         if not spacePos then
@@ -38,8 +40,6 @@ hook.Add("PlayerSay", "gWare.Vendors.InitVendor", function(ply, text)
         end
 
         local ent = ply:GetEyeTrace().Entity
-
-        print(ent:GetClass())
 
         if ent:GetClass() != "gware_vendors_base" then
             VoidLib.Notify(ply, "gWare Vendor", "Du musst auf einen Vendor angucken!", VoidUI.Colors.Red, 5)
@@ -66,6 +66,8 @@ hook.Add("PlayerSay", "gWare.Vendors.InitVendor", function(ply, text)
     end
 
     if removeVendor then
+        if not ply:IsSuperAdmin() then return end // TODO : add cami support
+
         local ent = ply:GetEyeTrace().Entity
 
         if ent:GetClass() != "gware_vendors_base" then

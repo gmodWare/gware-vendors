@@ -23,7 +23,7 @@ function ENT:Draw()
     ang:RotateAroundAxis(ang:Forward(), 90)
     ang:RotateAroundAxis(ang:Right(), 90)
 
-    surface.SetFont("KXX.ItemShop.R28")
+    surface.SetFont("VoidUI.R28")
     local width, height = surface.GetTextSize(name)
     local br = 8 -- space outline for text
     local boxWidth = width + 20
