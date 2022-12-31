@@ -17,7 +17,7 @@ function PANEL:GetItems()
     self.itemsBackground = self:Add("VoidUI.BackgroundPanel")
     self.itemsBackground:Dock(LEFT)
     self.itemsBackground:SDockMargin(15, 15, 15, 15)
-    self.itemsBackground:SSetSize(450, 0)
+    self.itemsBackground:SSetSize(460, 0)
     self.itemsBackground:SetTitle("Angebot:")
 
     local scrollbar = self.itemsBackground:Add("VoidUI.ScrollPanel")
@@ -66,6 +66,7 @@ function PANEL:ItemDetail(item, itemIndex)
         draw.SimpleText(item.name, "VoidUI.R22", 175, 35, VoidUI.Colors.White, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         draw.RoundedBox(0, 10, 57, 330, 1, VoidUI.Colors.Black)
 
+        // description
         draw.DrawText(VoidUI.TextWrap(item.description, "VoidUI.R20", w - 50), "VoidUI.R20", 25, 280, VoidUI.Colors.White, TEXT_ALIGN_LEFT)
     end
 
