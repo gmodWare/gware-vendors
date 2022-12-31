@@ -3,6 +3,7 @@ table.Empty(GWARE_VENDORS)
 ///// Add Vendors /////
 //////////////////////
 
+// Test Vendors
 local testVendor = gWare.Vendors.CreateVendor("Test Vendor")
 testVendor:AddItem({
     name = "Normale Klinge",
@@ -27,6 +28,16 @@ testVendor:AddItem({
     description = "Eine Klinge epischer Schärfe",
     price = 200,
     color = Color(124,22,207),
+    model = "models/props_junk/cardboard_box004a.mdl",
+    class = "weapon_357",
+})
+
+local testVendor1 = gWare.Vendors.CreateVendor("Legendärer Vendor")
+testVendor1:AddItem({
+    name = "Super Legendäre Klinge",
+    description = "Eine Klinge epischer Schärfe",
+    price = 200,
+    color = Color(230,196,46),
     model = "models/props_junk/cardboard_box004a.mdl",
     class = "weapon_357",
 })
