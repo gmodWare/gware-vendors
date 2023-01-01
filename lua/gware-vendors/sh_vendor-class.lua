@@ -44,6 +44,7 @@ end
     - color: Color
     - model: string
     - class: string
+    - type: enum - gWare.Vendors.Types.Weapon or gWare.Vendors.Types.SpawnableEntity
 */
 function VENDOR_CLASS:AddItem(dataTbl)
     table.insert(self.items, dataTbl)
@@ -71,3 +72,8 @@ function gWare.Vendors.GetVendor(str)
 
     return false
 end
+
+gWare.Vendors.Types = {
+    Weapon = 1,
+    SpawnableEntity = 2
+}

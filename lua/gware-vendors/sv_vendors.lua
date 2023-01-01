@@ -1,10 +1,33 @@
+function gWare.Vendors.GiveItem(ply, item)
+    ply:addMoney(-item.price)
+
+    if not item.itemtype then
+        VoidLib.Notify(ply, "gWare Vendor", "Der ItemType wurde nicht gesetzt!", VoidUI.Colors.Red, 5)
+        return
+    end
+
+    if item.itemtype == gWare.Vendors.Types.Weapon then
+        ply:Give(item.class)
+    end
+
+    if item.itemtype == gWare.Vendors.Types.SpawnableEntity then
+        local ent = ents.Create(item.class)
+        ent:SetPos(ply:GetPos() + Vector(0, 0, 50))
+        ent:Spawn()
+    end
+
+    VoidLib.Notify(ply, "gWare Vendor", "Du hast erfolgreich " .. item.name .. " gekauft!", VoidUI.Colors.Green, 5)
+end
+
+
 net.Receive("gWare.Vendors.BuyItem", function(len, ply)
     local vendorIndex = net.ReadUInt(7)
     local itemIndex = net.ReadUInt(7)
 
     local vendor = GWARE_VENDORS[vendorIndex]
-    local item = vendor.items[itemIndex]
+    if not vendor then return end
 
+    local item = vendor.items[itemIndex]
     if not item then return end
 
     if not ply:canAfford(item.price) then
@@ -18,18 +41,11 @@ net.Receive("gWare.Vendors.BuyItem", function(len, ply)
             return
         end
 
-        ply:addMoney(-item.price)
-        ply:Give(item.class)
-
-        VoidLib.Notify(ply, "gWare Vendor", "Du hast erfolgreich " .. item.name .. " gekauft!", VoidUI.Colors.Green, 5)
-
+        gWare.Vendors.GiveItem(ply, item)
         return
     end
 
-    ply:addMoney(-item.price)
-    ply:Give(item.class)
-
-    VoidLib.Notify(ply, "gWare Vendor", "Du hast erfolgreich " .. item.name .. " gekauft!", VoidUI.Colors.Green, 5)
+    gWare.Vendors.GiveItem(ply, item)
 end)
 
 hook.Add("PlayerSay", "gWare.Vendors.InitVendor", function(ply, text)

@@ -53,7 +53,6 @@ function ENT:Use(ply, activator)
         net.Send(ply)
 
         timer.Simple(0.1, function() cd = false end)
-
         return
     end
 
