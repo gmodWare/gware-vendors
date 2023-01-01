@@ -5,6 +5,10 @@ table.Empty(GWARE_VENDORS)
 
 // Test Vendors
 local testVendor = gWare.Vendors.CreateVendor("Test Vendor", "models/humans/group01/male_02.mdl")
+-- testVendor:SetJobWhitelist({
+--     ["citizen"] = true,
+-- })
+
 testVendor:AddItem({
     name = "Normale Klinge",
     description = "Normale Klinge welche nicht zu scharf ist und auch nicht zu stumpf ist sondern einfach nur normal ist",

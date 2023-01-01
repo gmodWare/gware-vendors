@@ -37,6 +37,26 @@ function ENT:Use(ply, activator)
         return
     end
 
+    local vendor = GWARE_VENDORS[self:GetVendorID()]
+
+    if vendor:GetJobWhitelist() then
+        if not vendor:GetJobWhitelist()[ply:getJobTable().command] then
+            VoidLib.Notify(ply, "gWare Vendor", "Du hast nicht die Berechtigung etwas bei diesem Verkäufer zu kaufen!", VoidUI.Colors.Red, 5)
+            return
+        end
+
+        if cd then return end
+        cd = true
+
+        net.Start("gWare.Vendor.SendVendor")
+            net.WriteUInt(self:GetVendorID(), 7)
+        net.Send(ply)
+
+        timer.Simple(0.1, function() cd = false end)
+
+        return
+    end
+
     if cd then return end
     cd = true
 

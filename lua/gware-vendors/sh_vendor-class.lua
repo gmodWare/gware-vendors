@@ -9,6 +9,7 @@ function VENDOR_CLASS:Create(name, model)
     newObject.id = #GWARE_VENDORS + 1
     newObject.model = model
     newObject.items = {}
+    newObject.jobwhitelist = nil
 
     table.insert(GWARE_VENDORS, newObject)
 
@@ -31,6 +32,10 @@ function VENDOR_CLASS:GetItems()
     return self.items
 end
 
+function VENDOR_CLASS:GetJobWhitelist()
+    return self.jobwhitelist
+end
+
 /* 
     dataTbl:
     - name: string
@@ -42,6 +47,14 @@ end
 */
 function VENDOR_CLASS:AddItem(dataTbl)
     table.insert(self.items, dataTbl)
+end
+
+/* 
+    dataTbl:
+    - ["job_command"] = true
+*/
+function VENDOR_CLASS:SetJobWhitelist(dataTbl)
+    self.jobwhitelist = dataTbl
 end
 
 // public constructor
