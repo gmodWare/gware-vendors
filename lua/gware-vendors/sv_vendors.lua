@@ -46,8 +46,22 @@ hook.Add("PlayerSay", "gWare.Vendors.InitVendor", function(ply, text)
             return
         end
 
-        ent:SetVendorID(vendor:GetID())
-        ent:SetModel(vendor:GetModel())
+        if ent:GetVendorID() > 0 then
+            VoidLib.Notify(ply, "gWare Vendor", "Dieser Vendor ist bereits initialisiert!", VoidUI.Colors.Red, 5)
+            return
+        end
+
+        local cachePos = ent:GetPos()
+        local cacheAngle = ent:GetAngles()
+
+        ent:Remove()
+
+        // remove the ent and create a new, to set the parent to world and remove the ent from the undo list
+        local newEnt = ents.Create("gware_vendors_base")
+        newEnt:SetPos(cachePos)
+        newEnt:SetAngles(Angle(cacheAngle))
+        newEnt:SetVendorID(vendor.id)
+        newEnt:Spawn()
 
         local json = file.Read("vendors.json", "DATA")
         local data = util.JSONToTable(json or "{}")
@@ -56,8 +70,8 @@ hook.Add("PlayerSay", "gWare.Vendors.InitVendor", function(ply, text)
 
         table.insert(data[game.GetMap()], {
             id = vendor:GetID(),
-            pos = ent:GetPos(),
-            angles = ent:GetAngles(),
+            pos = newEnt:GetPos(),
+            angles = newEnt:GetAngles(),
         })
 
         file.Write("vendors.json", util.TableToJSON(data, true))
