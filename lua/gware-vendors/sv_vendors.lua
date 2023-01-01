@@ -60,7 +60,7 @@ hook.Add("PlayerSay", "gWare.Vendors.InitVendor", function(ply, text)
         local newEnt = ents.Create("gware_vendors_base")
         newEnt:SetPos(cachePos)
         newEnt:SetAngles(Angle(cacheAngle))
-        newEnt:SetVendorID(vendor.id)
+        newEnt:SetVendorID(vendor:GetID())
         newEnt:Spawn()
 
         local json = file.Read("vendors.json", "DATA")
