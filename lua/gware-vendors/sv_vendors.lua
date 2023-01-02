@@ -35,13 +35,10 @@ net.Receive("gWare.Vendors.BuyItem", function(len, ply)
         return
     end
 
-    if vendor:GetJobWhitelist() then
-        if not vendor:GetJobWhitelist()[ply:getJobTable().command] then
-            VoidLib.Notify(ply, "gWare Vendor", "Du hast nicht die Berechtigung diesen Gegenstand zu kaufen!", VoidUI.Colors.Red, 5)
-            return
-        end
+    local whitelist = vendor:GetJobWhitelist()
 
-        gWare.Vendors.GiveItem(ply, item)
+    if whitelist and not whitelist[ply:Team()] then
+        VoidLib.Notify(ply, "gWare Vendor", "Du hast nicht die Berechtigung diesen Gegenstand zu kaufen!", VoidUI.Colors.Red, 5)
         return
     end
 
@@ -49,8 +46,8 @@ net.Receive("gWare.Vendors.BuyItem", function(len, ply)
 end)
 
 hook.Add("PlayerSay", "gWare.Vendors.InitVendor", function(ply, text)
-    local setVendor = text:StartWith("/setvendor" or "!setvendor")
-    local removeVendor = text:StartWith("/removevendor" or "!removevendor")
+    local setVendor = text:StartWith("/setvendor")
+    local removeVendor = text:StartWith("/removevendor")
 
     if setVendor then
         if not ply:IsSuperAdmin() then return end // TODO : add cami support

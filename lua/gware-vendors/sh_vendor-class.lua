@@ -52,7 +52,7 @@ end
 
 /* 
     dataTbl:
-    - ["job_command"] = true
+    - [TEAM_CITIZEN] = true
 */
 function VENDOR_CLASS:SetJobWhitelist(dataTbl)
     self.jobwhitelist = dataTbl
